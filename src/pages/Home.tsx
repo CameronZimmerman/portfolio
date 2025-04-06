@@ -17,7 +17,7 @@ const Home = () => {
           
           <Box maxW="1000px" textAlign="center" px={8}>
             <Text fontSize="xl" lineHeight="1.8" color="gray.700">
-              With years of experience in full-stack development, I've built modern web applications using TypeScript, React, and Node.js. I specialize in creating scalable solutions, from robust backend services to intuitive user interfaces. My work focuses on delivering high-quality products that solve real problems while maintaining clean, maintainable code.
+              With years of experience in full-stack development, I've built modern web applications using TypeScript, React, and Node.js. I specialize in creating scalable solutions, from robust backend services to intuitive user interfaces. My work focuses on delivering high-quality products that solve real problems while maintaining clean, sustainable code.
             </Text>
           </Box>
 
