@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Box, Popover, PopoverTrigger, PopoverContent, PopoverBody, PopoverArrow, Button, useDisclosure } from '@chakra-ui/react'
+import { Box, Popover, PopoverTrigger, PopoverContent, PopoverBody, PopoverArrow, Button, useDisclosure, useBreakpointValue } from '@chakra-ui/react'
 
 const Resume = () => {
     const [isInteractive, setIsInteractive] = useState(false)
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const isMobile = useBreakpointValue({ base: true, md: false })
 
     useEffect(() => {
         // This helps ensure the Godot instance gets proper focus
@@ -14,8 +15,10 @@ const Resume = () => {
     }, [isInteractive])
 
     const handleYes = () => {
-        setIsInteractive(true)
-        onClose()
+        if (!isMobile) {
+            setIsInteractive(true)
+            onClose()
+        }
     }
 
     return (
@@ -56,44 +59,46 @@ const Resume = () => {
                                 objectFit: 'contain'
                             }}
                         />
-                        <Popover
-                            isOpen={isOpen}
-                            onClose={onClose}
-                            placement="top"
-                            closeOnBlur={false}
-                        >
-                            <PopoverTrigger>
-                                <Button
-                                    position="absolute"
-                                    bottom="20px"
-                                    right="20px"
-                                    colorScheme="blue"
-                                    size="sm"
-                                    onClick={onOpen}
-                                >
-                                    Click me!
-                                </Button>
-                            </PopoverTrigger>
-                            <PopoverContent width="200px">
-                                <PopoverArrow />
-                                <PopoverBody>
-                                    <Box textAlign="center" py={2}>
-                                        <Box mb={2}>Want to do something fun?</Box>
-                                        <Button
-                                            size="sm"
-                                            colorScheme="blue"
-                                            onClick={handleYes}
-                                            width="100%"
-                                        >
-                                            Yes!
-                                        </Button>
-                                    </Box>
-                                </PopoverBody>
-                            </PopoverContent>
-                        </Popover>
+                        {!isMobile && (
+                            <Popover
+                                isOpen={isOpen}
+                                onClose={onClose}
+                                placement="top"
+                                closeOnBlur={false}
+                            >
+                                <PopoverTrigger>
+                                    <Button
+                                        position="absolute"
+                                        bottom="20px"
+                                        right="20px"
+                                        colorScheme="blue"
+                                        size="sm"
+                                        onClick={onOpen}
+                                    >
+                                        Click me!
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent width="200px">
+                                    <PopoverArrow />
+                                    <PopoverBody>
+                                        <Box textAlign="center" py={2}>
+                                            <Box mb={2}>Want to do something fun?</Box>
+                                            <Button
+                                                size="sm"
+                                                colorScheme="blue"
+                                                onClick={handleYes}
+                                                width="100%"
+                                            >
+                                                Yes!
+                                            </Button>
+                                        </Box>
+                                    </PopoverBody>
+                                </PopoverContent>
+                            </Popover>
+                        )}
                     </>
                 )}
-                {isInteractive && (
+                {isInteractive && !isMobile && (
                     <Box
                         w="100%"
                         h="100%"
